@@ -20,7 +20,6 @@ while (True):
         if img[0][i][2] > 200 and img[0][i][1] < 50 and img[0][i][0] < 50:
             break
     if i < 800:
-        i = i+12
         s = s+" "+str(i)
         device.shell(s)
         print(i)
