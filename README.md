@@ -5,6 +5,8 @@ Screenshot are processed by OpenCV to find the end points of the pillar with pix
 for the to make the bridge. The distance between the pillar and the time duration of the hold were figure out by trial and error and the relation is simply to hold 
 screen as unit length of the distance but in milliseconds.
 
+The game on the screen is mirrored over wifi from the mobile.
+
 ## What's Ahead:
 
 > The time taken between each turn is nearly 3 seconds and that is due to limitation of the screen capture over ADB
