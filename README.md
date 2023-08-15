@@ -6,7 +6,7 @@ for the to make the bridge. The distance between the pillar and the time duratio
 screen as unit length of the distance but in milliseconds.
 
 The game on the screen is mirrored over wifi from the mobile.
-
+![](stick-Hero_automate.gif)
 ## What's Ahead:
 
 > The time taken between each turn is nearly 3 seconds and that is due to limitation of the screen capture over ADB
