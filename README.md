@@ -1,14 +1,31 @@
-# StickHero-Automate
-The Python Script uses OpenCV and ADB(Android Debugging Bridge) this allows the script to capture screenshots and also send commands to the phone over usb.
+# Stick Hero — Automate 🎮
 
-Screenshot are processed by OpenCV to find the end points of the pillar with pixel perfect accuracy this length is then used to calculate the time to hold the screen
-for the character to make the bridge. The distance between the pillar and the time duration of the hold were figure out by trial and error and the relation is simply to hold 
-screen as unit length of the distance but in milliseconds.
+A small computer-vision bot that plays the mobile game **Stick Hero** for you, using OpenCV for pixel-perfect measurement and ADB (Android Debug Bridge) to drive the phone directly over USB/Wi-Fi — no root or game-memory hacking involved.
 
-The game on the screen is mirrored over wifi from the mobile.
-![](stick-Hero_automate.gif)
-## What's Ahead:
+![Stick Hero being played automatically](stick-Hero_automate.gif)
 
-> The time taken between each turn is nearly 3 seconds and that is due to limitation of the screen capture over ADB
+## How it works
 
-> The logic can be altered to make this suitable for other game automation too. The OpenCV and control logic only needs to change and this can be used as a proof of concept
+1. **Capture** — `device.screencap()` grabs a screenshot of the mirrored phone screen over ADB.
+2. **Measure** — a single horizontal scan-line of the screenshot is thresholded against black to find the pillar edges with pixel-perfect accuracy, giving the exact gap distance between the current and next pillar.
+3. **Act** — that pixel distance is mapped 1:1 to a hold duration in milliseconds (found empirically by trial and error: *hold time ≈ distance*), and an `input touchscreen swipe` ADB command holds the screen for exactly that long so the stick grows to the right length and the character crosses safely.
+4. Repeat, forever (or until you lose 😄).
+
+## Requirements
+
+- Python 3
+- [`pure-python-adb`](https://pypi.org/project/pure-python-adb/) (`pip install pure-python-adb`)
+- OpenCV (`pip install opencv-python`)
+- Android device with **USB debugging** enabled, connected via `adb`, with the game screen mirrored to the desktop
+
+```bash
+pip install -r requirements.txt
+adb start-server            # make sure your device shows up in `adb devices`
+python OpenCV-automate.py
+```
+
+## What's ahead
+
+> The time taken between each turn is nearly 3 seconds, due to the limitation of screen capture over ADB.
+
+> The logic can be adapted to automate other similar games — only the OpenCV measurement and control logic need to change, so this repo can serve as a proof of concept for that class of timing-based mobile games.
